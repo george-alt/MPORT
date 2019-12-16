@@ -1,3 +1,4 @@
+import 'package:mport/pages/home.page.dart';
 import 'package:mport/pages/login.page.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget{
       title: "MPORT.io",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.deepOrange),
-      home: LoginPage(),
+      home: HomePage(),
     );
   }
 }
