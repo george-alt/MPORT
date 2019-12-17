@@ -1,47 +1,68 @@
 import 'package:flutter/material.dart';
+import './page.dart';
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => new _HomePageState();
+}
 
-class HomePage extends StatelessWidget {
+class _HomePageState extends State<HomePage> {
+
+  String currentProfilePic = "https://raw.githubusercontent.com/george-alt/MPORT/master/assets/profile-picture.png";
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Center(
-          child: SizedBox(
-            width: 100,
-            child: Text(
-              "mport",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black38,
-                fontSize: 20
+        title: new Text(
+          "MPort",
+        ), 
+        backgroundColor: Colors.black38,
+      ),
+      drawer: new Drawer(
+        child: new ListView(
+          children: <Widget>[
+            new UserAccountsDrawerHeader(
+              accountEmail: new Text("bramvbilsen@gmail.com"),
+              accountName: new Text("Bramvbilsen"),
+              currentAccountPicture: new GestureDetector(
+                child: new CircleAvatar(
+                  backgroundImage: new NetworkImage(currentProfilePic),
+                  backgroundColor: Colors.transparent,
+                ),
+                onTap: () => print("This is your current account."),
               ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
-        leading: Container(
-          height: 40,
-          width: 40,
-          decoration: new BoxDecoration(
-            image: new DecorationImage(
-              image: AssetImage("assets/profile-picture.png"),
-              fit: BoxFit.fitHeight,
-            ),
-          ),
-        ),
-        actions: <Widget>[
-          Container(
-            width: 60,
-            child: FlatButton(
-              child: Icon(
-                Icons.search,
-                color: Color(0xFFBABABA),
+              
+              decoration: new BoxDecoration(
+                image: new DecorationImage(
+                  image: new NetworkImage("https://img00.deviantart.net/35f0/i/2015/018/2/6/low_poly_landscape__the_river_cut_by_bv_designs-d8eib00.jpg"),
+                  fit: BoxFit.fill
+                )
               ),
-              onPressed: () => {},
             ),
-          ),
-        ],
+            new ListTile(
+              title: new Text("Page One"),
+              trailing: new Icon(Icons.arrow_upward),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new Page("First Page")));
+              }
+            ),
+            new ListTile(
+              title: new Text("Page Two"),
+              trailing: new Icon(Icons.arrow_right),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new Page("Second Page")));
+              }
+            ),
+            new Divider(),
+            new ListTile(
+              title: new Text("Cancel"),
+              trailing: new Icon(Icons.cancel),
+              onTap: () => Navigator.pop(context),
+            ),
+          ],
+        ),
       ),
       body: Container(
         color: Color(0xFFF2F3F6),
@@ -55,6 +76,7 @@ class HomePage extends StatelessWidget {
   }
 }
 
+//card de dados que é inserido no body
 Widget cardItem() {
   return Card(
     child: Column(
